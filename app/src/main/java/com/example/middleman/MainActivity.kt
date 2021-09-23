@@ -46,16 +46,6 @@ class MainActivity : AppCompatActivity() {
         val intent = IntentFilter("com.madkour.emitter")
         registerReceiver(MyReceiver(), intent)
 
-
-//           val policy = StrictMode.ThreadPolicy.Builder().permitAll().build()
-//           StrictMode.setThreadPolicy(policy)
-        //        val i = Intent()
-//        i.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-//        i.action = "android.intent.action.VIEW"
-//        i.component =
-//            ComponentName.unflattenFromString("com.example.package/com.example.package.activityName")
-//        ContextCompat.startActivity(i)
-
     }
 
 }
