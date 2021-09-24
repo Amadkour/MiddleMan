@@ -1,6 +1,8 @@
 package com.example.middleman
 
+import android.content.ComponentName
 import android.content.Context
+import android.content.Intent
 import android.content.IntentFilter
 import android.os.Bundle
 import androidx.activity.compose.setContent
@@ -24,20 +26,18 @@ import kotlinx.coroutines.*
 class MainActivity : AppCompatActivity() {
     companion object {
         var context: Context? = null
-
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         context=applicationContext
         setContent {
-            val userModel= UserViewModel()
-            val user by userModel.user.collectAsState()
+           
             Box(contentAlignment = Alignment.Center,
             modifier = Modifier.fillMaxSize()) {
                 Text(
-                    user.name, style = TextStyle(
-                        fontSize = 20.sp,
+                    "MiddleMan App", style = TextStyle(
+                        fontSize = 40.sp,
                         color = Color.Magenta
                     )
                 )
@@ -45,7 +45,8 @@ class MainActivity : AppCompatActivity() {
         }
         val intent = IntentFilter("com.madkour.emitter")
         registerReceiver(MyReceiver(), intent)
-
     }
+
+
 
 }

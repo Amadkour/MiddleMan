@@ -9,6 +9,7 @@ import android.os.StrictMode.ThreadPolicy
 import com.example.emitter.accessLayer.model.User
 import com.example.middleman.viewModel.UserViewModel
 import com.google.gson.Gson
+import kotlin.concurrent.thread
 
 
 class MyReceiver : BroadcastReceiver() {
@@ -19,40 +20,13 @@ class MyReceiver : BroadcastReceiver() {
     companion object{
         private var client: Client? = null
     }
-
-
     override fun onReceive(context: Context, intent: Intent) {
-
         if (intent.extras != null) {
             val user: User? = intent.getParcelableExtra<User>("item")
-//            Toast.makeText(context, user?.email, Toast.LENGTH_LONG).show()
-            println("-------------------(Client )------------------")
 
-            if (user != null) {
-                println()
-                println()
-                println()
-                println("=======================(update Variable )======================")
-                println()
-                println()
-                println()
-                userModel.setUser(user)
-            }
-            val middleManIntent = Intent()
-            //---------------------(send data item to MiddleMan App)-----------//
-
-            middleManIntent.putExtra(
-                "item",user)
-            middleManIntent.action = "com.madkour.middleMan"
-            context.sendBroadcast(middleManIntent)
-            //---------------------(pop MiddleMan app to  front)-----------//
-//
             val policy = ThreadPolicy.Builder().permitAll().build()
             StrictMode.setThreadPolicy(policy)
                if(client==null) {
-                   println("*******************************")
-                   println("*******************************( New Client )*******************************")
-                   println("*******************************")
                    client = Client(address, port)
                }
             try {
@@ -62,9 +36,10 @@ class MyReceiver : BroadcastReceiver() {
                 }
 
             }catch(ex:Exception) {
+                println("=====================( error )===============")
+                println(ex)
 
             }
-
         }
 
     }
